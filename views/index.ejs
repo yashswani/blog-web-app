@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post</title>
+
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+
+<body>
+    <main class="container">
+
+        <header class="hero">
+            <h1>Hey There! Create a Blog!</h1>
+            <p>Write, edit, and manage your blog posts easily.</p>
+        </header>
+
+        <section class="form-card">
+            <form action="/submit" method="POST">
+                <label for="title">Enter your Blog Title</label>
+                <input 
+                    type="text" 
+                    id="title" 
+                    name="title" 
+                    placeholder="Enter blog title"
+                >
+
+                <label for="content">Blog Content:</label>
+                <textarea 
+                    id="content" 
+                    name="content" 
+                    placeholder="Write your blog content here..."
+                ></textarea>
+
+                <button class="primary-btn" type="submit">Submit</button>
+            </form>
+        </section>
+
+        <section class="posts-section">
+            <h2>The posts you made are:</h2>
+
+            <% if (locals.posts) { %>
+                <ul class="posts-list">
+                    <% posts.forEach((post) => { %>
+                        <li class="post-card">
+                            <h3><%= post.title %></h3>
+                            <p><%= post.content %></p>
+
+                            <div class="post-actions">
+                                <a class="edit-btn" href="/edit/<%= post.id %>">Edit</a>
+
+                                <form action="/delete/<%= post.id %>" method="POST">
+                                    <button class="delete-btn" type="submit">Delete</button>
+                                </form>
+                            </div>
+                        </li>
+                    <% }) %>
+                </ul>
+            <% } else { %>
+                <div class="empty-state">
+                    <p>No posts to display</p>
+                </div>
+            <% } %>
+        </section>
+
+    </main>
+</body>
+</html>
