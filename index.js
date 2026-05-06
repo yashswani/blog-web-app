@@ -1,6 +1,6 @@
 import express from "express";
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.get("/", (req, res) => {
@@ -11,6 +11,9 @@ let postId=1;
 app.post("/submit", (req, res) => {
     const title=req.body.title;
     const content=req.body.content;
+    if (!title || !content) {
+        return res.send("Title and content are required.");
+    }
     const newPost={
         id:postId,
         title:title,

@@ -19,12 +19,14 @@
                     id="title"
                     name="title" 
                     value="<%= post.title %>"
+                    required
                 >
 
                 <label for="content">Blog Content</label>
                 <textarea 
                     id="content"
                     name="content"
+                    required
                 ><%= post.content %></textarea>
 
                 <button class="primary-btn" type="submit">Update</button>
